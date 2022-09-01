@@ -36,7 +36,7 @@ export default function Home() {
     if (destination && destination.index === 0 && selectedWord.substring(0, 1) === destination.droppableId) {
       wordCategory.push(draggableId);
       // below code is throwing error when opened
-      // wordArr = wordArr.filter(word => word !== draggableId);
+      wordArr = wordArr.filter(word => word !== draggableId);
     }
   }
   
@@ -68,14 +68,9 @@ export default function Home() {
             <div className='row'>
               <Droppable droppableId='droppable' direction='horizontal'>
                 {(prov) => (
-                  <div className={'col-12 ' + styles.grid} style={{margin: 0 + ' auto'}}>
-                    {
-                      wordArr.map((word, index) => (
-                        <div {...prov.droppableProps} ref={prov.innerRef} className={'col-2 ' + styles.grid} key={index}>
-                          <Words id={word} index={index} key={index}></Words>
-                        </div>
-                      ))
-                    } 
+                  <div className={'col-12 ' + styles.grid} style={{margin: 0 + ' auto'}}
+                  {...prov.droppableProps} ref={prov.innerRef}>
+                    <Words wordProp={wordArr}></Words>
                     {prov.placeholder}
                   </div>
                 )}

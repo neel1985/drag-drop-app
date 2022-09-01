@@ -1,20 +1,21 @@
-import { Droppable, Draggable } from 'react-beautiful-dnd'
+import { Draggable } from 'react-beautiful-dnd'
 import styles from '../styles/Home.module.scss';
 
 function Words(...details) {
-    const wordId = details[0].id;
-    const wordIndex = details[0].index;
+    const wordArr = details[0].wordProp;
   return (
-        <Draggable draggableId={wordId} index={wordIndex}>
+    wordArr.map((word, index) => (
+        <Draggable key={word} draggableId={word} index={index}>
             {(provided) => (
                 <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}
                     className={'col-2 ' + styles.grid}>
                     <div className={styles.card + ' mb-4'}>
-                        <span className='text-center'>{wordId.toUpperCase()}</span>
+                        <span className='text-center'>{word.toUpperCase()}</span>
                     </div>
                 </div>
             )}
-        </Draggable>        
+        </Draggable>
+    ))     
   )
 }
 
